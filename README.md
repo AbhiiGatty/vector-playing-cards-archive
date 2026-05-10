@@ -84,9 +84,49 @@ vector-playing-cards-archive/
     1.3/   67 files        <- featured
 ```
 
-Filenames are unchanged from the upstream zips. They follow the
-pattern `<rank>_of_<suit>.<ext>`, for example `7_of_hearts.svg`,
-`king_of_spades.png`, plus `red_joker.svg` and `black_joker.svg`.
+Files have been **renamed** from the upstream `<rank>_of_<suit>.<ext>`
+naming to a strictly numeric scheme so URLs can be generated
+programmatically with no string lookup table:
+
+```
+card_<suit>_<rank>[_alt].<ext>
+```
+
+| Suit | Number |
+|---|---|
+| Hearts   | 1 |
+| Clubs    | 2 |
+| Spades   | 3 |
+| Diamonds | 4 |
+| Joker    | 5 |
+
+| Rank | Number |
+|---|---|
+| Ace        | 1 |
+| 2 to 10    | 2 to 10 |
+| Jack       | 11 |
+| Queen      | 12 |
+| King       | 13 |
+| Joker      | 1 = red, 2 = black (with suit = 5) |
+
+The `_alt` suffix marks the secondary face-card art that ships with
+the upstream pack (e.g., `card_3_11_alt.svg` is the alternate jack of
+spades). The "second ace of spades" the original deck includes lives
+at `card_3_1_alt`.
+
+A few examples:
+
+- `card_1_1.svg` — ace of hearts
+- `card_2_10.svg` — 10 of clubs
+- `card_3_13.svg` — king of spades
+- `card_4_5.svg` — 5 of diamonds
+- `card_5_1.svg` — red joker
+- `card_5_2.svg` — black joker
+- `card_2_11_alt.svg` — alternate jack of clubs
+
+The point of the numeric scheme: an OTP / dice / random-card consumer
+just does `\`card_${1+Math.floor(Math.random()*4)}_${1+Math.floor(Math.random()*13)}.svg\``
+and it is a valid URL — no rank/suit dictionary required.
 
 ## Use via jsDelivr
 
@@ -102,21 +142,31 @@ A few examples:
 ```html
 <!-- 7 of hearts, SVG, latest version -->
 <img
-    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3/7_of_hearts.svg"
+    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3/card_1_7.svg"
     width="80" height="116" alt="7 of hearts"
 />
 
 <!-- King of spades, PNG -->
 <img
-    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/png/1.3/king_of_spades.png"
+    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/png/1.3/card_3_13.png"
     alt="King of spades"
 />
 
 <!-- Pin to a specific commit (recommended for production) -->
 <img
-    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@v1.0.0/svg/1.3/ace_of_clubs.svg"
+    src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@v1.0.0/svg/1.3/card_2_1.svg"
     alt="Ace of clubs"
 />
+```
+
+A tiny JS snippet for picking a random card:
+
+```js
+const suit = 1 + Math.floor(Math.random() * 4);   // 1..4
+const rank = 1 + Math.floor(Math.random() * 13);  // 1..13
+const url =
+    `https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive` +
+    `@main/svg/1.3/card_${suit}_${rank}.svg`;
 ```
 
 For more aggressive caching, jsDelivr lets you append `@latest` (always
