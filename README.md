@@ -30,6 +30,10 @@ file. This repo solves both problems by hosting every published bundle
 of `vector-playing-cards` directly on GitHub, where any modern free
 CDN (jsDelivr, Statically) can serve them globally.
 
+The original upstream zip archives are mirrored verbatim under
+[`downloads/`](downloads), so the repo stands on its own — no
+dependency on the Google Code archive remaining online.
+
 ## About Google Code Archive
 
 > Welcome! The Google Code Archive contains the data found on the
@@ -46,19 +50,25 @@ CDN (jsDelivr, Statically) can serve them globally.
 
 ## Versions
 
-Every published version of `vector-playing-cards` is preserved. Below
-is the original Downloads tab from the project, reproduced verbatim:
+Every published version of `vector-playing-cards` is preserved. The
+original upstream zip bundles are mirrored verbatim under
+[`downloads/`](downloads) so this repo stands on its own — nothing
+here depends on the Google Code archive remaining online. SHA-256
+checksums are in [`downloads/SHA256SUMS.txt`](downloads/SHA256SUMS.txt).
 
 | File | Summary | Status | Uploaded | Size |
 |---|---|---|---|---|
-| [PNG-cards-1.3.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | PNG Playing Cards Version 1.3 | **Featured** | Aug 18, 2012 | 4.6 MB |
-| [SVG-cards-1.3.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | SVG Playing Cards Version 1.3 | **Featured** | Aug 18, 2012 | 3.57 MB |
-| [SVG-cards-1.2.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | SVG Playing Cards Version 1.2 | Deprecated | Apr 24, 2011 | 3.46 MB |
-| [PNG-cards-1.2.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | PNG Playing Cards Version 1.2 | Deprecated | Apr 24, 2011 | 4.57 MB |
-| [PNG-cards-1.1.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | PNG Playing Cards Version 1.1 | Deprecated | Mar 9, 2011 | 4.52 MB |
-| [SVG-cards-1.1.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | SVG Playing Cards Version 1.1 | Deprecated | Mar 9, 2011 | 3.36 MB |
-| [PNG-cards.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | PNG Playing Cards Version 1.0 | Deprecated | Mar 4, 2011 | 1.79 MB |
-| [SVG-cards.zip](https://code.google.com/archive/p/vector-playing-cards/downloads) | SVG Playing Cards Version 1.0 | Deprecated | Mar 4, 2011 | 176.94 KB |
+| [PNG-cards-1.3.zip](downloads/PNG-cards-1.3.zip) | PNG Playing Cards Version 1.3 | **Featured** | Aug 18, 2012 | 4.6 MB |
+| [SVG-cards-1.3.zip](downloads/SVG-cards-1.3.zip) | SVG Playing Cards Version 1.3 | **Featured** | Aug 18, 2012 | 3.57 MB |
+| [SVG-cards-1.2.zip](downloads/SVG-cards-1.2.zip) | SVG Playing Cards Version 1.2 | Deprecated | Apr 24, 2011 | 3.46 MB |
+| [PNG-cards-1.2.zip](downloads/PNG-cards-1.2.zip) | PNG Playing Cards Version 1.2 | Deprecated | Apr 24, 2011 | 4.57 MB |
+| [PNG-cards-1.1.zip](downloads/PNG-cards-1.1.zip) | PNG Playing Cards Version 1.1 | Deprecated | Mar 9, 2011 | 4.52 MB |
+| [SVG-cards-1.1.zip](downloads/SVG-cards-1.1.zip) | SVG Playing Cards Version 1.1 | Deprecated | Mar 9, 2011 | 3.36 MB |
+| [PNG-cards.zip](downloads/PNG-cards.zip) | PNG Playing Cards Version 1.0 | Deprecated | Mar 4, 2011 | 1.79 MB |
+| [SVG-cards.zip](downloads/SVG-cards.zip) | SVG Playing Cards Version 1.0 | Deprecated | Mar 4, 2011 | 176.94 KB |
+
+The [original Google Code downloads page](https://code.google.com/archive/p/vector-playing-cards/downloads)
+remains the upstream source of record.
 
 Use **1.3** unless you specifically need an older variant. The 1.0 set
 is much smaller because it predates the joker / face-card additions
@@ -72,6 +82,7 @@ vector-playing-cards-archive/
   LICENSE                  LGPL-3.0 text
   NOTICE.md                source attribution
   assets/                  README banners
+  downloads/               verbatim upstream zip bundles + SHA256SUMS.txt
   svg/
     1.0/   54 files
     1.1/   67 files

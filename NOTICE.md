@@ -17,8 +17,15 @@ trivially fetchable from a CDN.
 ## What is preserved here
 
 All four published version bundles (1.0, 1.1, 1.2, 1.3) of both the
-SVG and PNG card sets, organized by version under `svg/` and `png/`.
-Filenames are unchanged from the upstream zip archives.
+SVG and PNG card sets:
+
+- The original upstream zip archives, byte-for-byte, under
+  `downloads/` — so this mirror remains usable even if the Google Code
+  archive is taken offline. SHA-256 checksums are in
+  `downloads/SHA256SUMS.txt`.
+- An unpacked, renumbered copy organized by version under `svg/` and
+  `png/`, intended for direct CDN delivery (see the README for the
+  renaming scheme).
 
 This repository adds:
 
