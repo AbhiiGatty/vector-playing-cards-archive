@@ -74,6 +74,33 @@ Use **1.3** unless you specifically need an older variant. The 1.0 set
 is much smaller because it predates the joker / face-card additions
 introduced in 1.1.
 
+### Download and verify with `curl`
+
+Grab one bundle plus its checksum and verify:
+
+```sh
+BASE="https://raw.githubusercontent.com/AbhiiGatty/vector-playing-cards-archive/main/downloads"
+curl -sLO "$BASE/SVG-cards-1.3.zip"
+curl -sLO "$BASE/SHA256SUMS.txt"
+sha256sum --ignore-missing -c SHA256SUMS.txt
+# SVG-cards-1.3.zip: OK
+```
+
+Or fetch every bundle and verify them all at once:
+
+```sh
+BASE="https://raw.githubusercontent.com/AbhiiGatty/vector-playing-cards-archive/main/downloads"
+curl -sLO "$BASE/SHA256SUMS.txt"
+awk '{print $2}' SHA256SUMS.txt | sed 's/^\*//' | \
+    xargs -I{} curl -sLO "$BASE/{}"
+sha256sum -c SHA256SUMS.txt
+```
+
+On macOS, replace `sha256sum -c` with `shasum -a 256 -c` (both ship
+with the OS). On Windows PowerShell, use
+`Get-FileHash <file> -Algorithm SHA256` and compare to the matching
+line in `SHA256SUMS.txt`.
+
 ## Repository layout
 
 ```
