@@ -20,6 +20,87 @@ delivery via jsDelivr.
 
 ---
 
+## Quick start — copy and paste
+
+Pick a card, any card. Replace `<suit>` (1–4) and `<rank>` (1–13) with the values you want, or use the random-card JS snippet below.
+
+```html
+<!-- Ace of spades, SVG -->
+<img src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3/card_3_1.svg"
+     width="80" height="116" alt="Ace of spades" />
+
+<!-- 7 of hearts, SVG -->
+<img src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3/card_1_7.svg"
+     width="80" height="116" alt="7 of hearts" />
+
+<!-- King of clubs, PNG -->
+<img src="https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/png/1.3/card_2_13.png"
+     width="80" height="116" alt="King of clubs" />
+```
+
+**Random card (JavaScript):**
+
+```js
+const CDN = "https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3";
+const suit = 1 + Math.floor(Math.random() * 4);   // 1=Hearts 2=Clubs 3=Spades 4=Diamonds
+const rank = 1 + Math.floor(Math.random() * 13);  // 1=Ace 2-10 11=Jack 12=Queen 13=King
+const url  = `${CDN}/card_${suit}_${rank}.svg`;
+```
+
+**Sanity-check a path before shipping:**
+
+```sh
+curl -I "https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/svg/1.3/card_1_1.svg"
+# Expect: HTTP/2 200
+# A 403 means the path or filename is wrong — check suit/rank numbers and the version folder.
+```
+
+---
+
+## AI agent context
+
+> This section is written for Claude, Copilot, and other coding assistants so they can integrate this repo correctly without guessing.
+
+### CDN URL template
+
+```
+https://cdn.jsdelivr.net/gh/AbhiiGatty/vector-playing-cards-archive@main/<format>/<version>/card_<suit>_<rank>[_alt].<ext>
+```
+
+| Placeholder | Valid values | Notes |
+|---|---|---|
+| `<format>` | `svg` or `png` | SVG recommended for web; scales to any size |
+| `<version>` | `1.0`, `1.1`, `1.2`, `1.3` | **Use `1.3`** — it is the featured version with the best face-card art |
+| `<suit>` | `1` `2` `3` `4` (or `5` for jokers) | 1=Hearts, 2=Clubs, 3=Spades, 4=Diamonds, 5=Joker |
+| `<rank>` | `1`–`13` (or `1`/`2` when suit=5) | 1=Ace, 11=Jack, 12=Queen, 13=King; suit=5 rank=1=Red joker, rank=2=Black joker |
+| `[_alt]` | optional suffix | Alternate face-card art (available in 1.1+) — e.g., `card_3_11_alt.svg` |
+| `<ext>` | `.svg` or `.png` | Must match `<format>` |
+
+### What exists vs. what does not
+
+- `svg/1.0/` — 54 files, no `_alt` variants, no jokers in this set (suits 1–4, ranks 1–13 only)
+- `svg/1.1/`, `svg/1.2/`, `svg/1.3/` — 67 files each, includes `_alt` face cards and jokers (suit=5, rank=1–2)
+- Same structure mirrors under `png/1.0/` through `png/1.3/`
+- There is no `svg/1.4/` or higher — do not reference versions that are not listed here
+
+### Rules for code generation
+
+1. **Always use `1.3`** unless the project has an explicit constraint requiring an older version.
+2. **File naming is numeric only** — never use suit names (`spades`, `hearts`) or rank names (`ace`, `king`) in the URL; they will 404.
+3. **Verify with `curl -I`** before committing a CDN_BASE constant. A 403 from jsDelivr means the folder path is wrong (not a permissions issue — this repo is public).
+4. **Do not generate `_alt` URLs** unless the consuming code explicitly selects alternate art.
+5. **Do not use suit=5 (jokers)** unless the application specifically deals joker cards.
+6. **Pin to a commit SHA for production** if stability matters: replace `@main` with `@<sha>` to prevent any future commit from changing cached files.
+
+### Known projects using this repo
+
+| Project | Version | Notes |
+|---|---|---|
+| [abhiigatty.com/tools/otp](https://abhiigatty.com/tools/otp) | `svg/1.3` | Suits 1–4, ranks 1–13, no jokers/alt |
+
+---
+
+
 ## About this archive
 
 When Google turned down the Google Code Project Hosting Service in
